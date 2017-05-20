@@ -21,6 +21,8 @@ INSTALL C++ SDK - ALDEBARAN
 3) Install: qiBuild </br>
 -> sudo apt install python-pip </br>
 -> pip install qibuild </br>
+  If qiBuild doesn't launch: 
+	-> gedit ~/.bashrc and in the end of the file add: export PATH=${PATH}:${HOME}/.local/bin
 
 4) Configuration: qiBuild Toolchains </br>
 -> qibuild init --interactive </br>
