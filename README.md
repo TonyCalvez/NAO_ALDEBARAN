@@ -3,10 +3,10 @@ INSTALL C++ SDK - ALDEBARAN
 
 0) The pre-requisites </br>
 -> sudo apt-get install gcc-multilib libc6-dev libc6-i386 </br>
-
-1) Install: Python 2.7 (only) + CMake + QTCreator </br>
 -> sudo apt-get install build-essential checkinstall </br>
 -> sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev </br>
+
+1) Install: Python 2.7 (only) + CMake + QTCreator </br>
 -> sudo apt-get install gcc cmake qtcreator </br>
 -> cd /usr/src </br>
 -> wget https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tgz </br>
