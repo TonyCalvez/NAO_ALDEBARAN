@@ -27,6 +27,7 @@ INSTALL C++ SDK - ALDEBARAN
 4) Configuration: qiBuild Toolchains </br>
 -> qibuild init --interactive </br>
 -> qitoolchain create linux <path/to/cpp/sdk>/toolchain.xml -- default </br>
+-> qitoolchain create mytoolchain <path/to/cpp/sdk>/toolchain.xml -- default </br>
 -> qitoolchain info </br>
 
 5) Workspace : Helloworld </br>
