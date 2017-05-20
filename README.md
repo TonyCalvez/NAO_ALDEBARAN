@@ -19,6 +19,7 @@ INSTALL C++ SDK - ALDEBARAN
 -> Online :https://developer.softbankrobotics.com/us-en/downloads/pepper </br>
 
 3) Install: qiBuild </br>
+-> sudo apt install python-pip
 -> pip install qibuild </br>
 
 4) Configuration: qiBuild Toolchains </br>
