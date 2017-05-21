@@ -56,7 +56,7 @@
 ```
 -> cd /usr/src/workspace
 -> qibuild config --wizard
--> qibuild configure
+-> qibuild configure -c mytoolchain
 -> qibuild make
 ```
 
