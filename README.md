@@ -1,4 +1,8 @@
 # NAO-ALDEBARAN
+
+Video to install :  https://youtu.be/yOC8jpNYSzQ
+Video to compile : https://youtu.be/-7ceG7AA1Do
+
 ## To Install C++ SDK - ALDEBARAN
 
 
@@ -66,8 +70,6 @@
 -> cd /usr/src/areacompilation
 -> ./helloworld --pip <robot_ip> --pport <robot_port>
 ```
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/yOC8jpNYSzQ?ecver=1" frameborder="0" allowfullscreen></iframe>
 
 Link: https://www.uv.mx/anmarin/papers/NAO_Tutorial.pdf
 Link: http://dhrc.snu.ac.kr/nao-1-14-installation-guide-on-ubuntu-12-04/
