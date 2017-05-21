@@ -57,11 +57,11 @@
 -> cd /usr/src/workspace
 -> qibuild config --wizard
 -> qibuild configure -c mytoolchain
--> qibuild make
+-> qibuild make -c mytoolchain
 ```
 
-## To Compile C++ SDK - ALDEBARAN
-### 7) Compilation </br>
+## To Launch C++ SDK - ALDEBARAN
+### 7) Start the Project </br>
 ```
 -> cd /usr/src/areacompilation
 -> ./helloworld --pip <robot_ip> --pport <robot_port>
