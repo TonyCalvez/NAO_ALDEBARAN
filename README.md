@@ -55,6 +55,7 @@
 ### 6) Workspace : Helloworld </br>
 ```
 -> cd /usr/src/workspace
+-> qibuild config --wizard
 -> qibuild configure
 -> qibuild make
 ```
