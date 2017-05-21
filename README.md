@@ -67,7 +67,7 @@
 -> ./helloworld --pip <robot_ip> --pport <robot_port>
 ```
 
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yOC8jpNYSzQ?ecver=1" frameborder="0" allowfullscreen></iframe>
 
 Link: https://www.uv.mx/anmarin/papers/NAO_Tutorial.pdf
 Link: http://dhrc.snu.ac.kr/nao-1-14-installation-guide-on-ubuntu-12-04/
