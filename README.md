@@ -55,7 +55,7 @@ Video to compile : https://youtu.be/-7ceG7AA1Do
 -> qitoolchain info
 ```
 
-## To Work C++ SDK - ALDEBARAN
+## To Compilet the Program C++ with the SDK - ALDEBARAN
 ### 6) Workspace : Helloworld </br>
 ```
 -> cd /usr/src/workspace
@@ -64,7 +64,7 @@ Video to compile : https://youtu.be/-7ceG7AA1Do
 -> qibuild make -c mytoolchain
 ```
 
-## To Launch C++ SDK - ALDEBARAN
+## To Launch the Program with the C++ - ALDEBARAN
 ### 7) Start the Project </br>
 ```
 -> cd /usr/src/areacompilation
