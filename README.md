@@ -50,8 +50,9 @@ Video to compile : https://youtu.be/-7ceG7AA1Do
 ### 5) Configuration: qiBuild Toolchains </br>
 ```
 -> qibuild init --interactive 
--> qitoolchain create linux <path/to/cpp/sdk>/toolchain.xml -- default
--> qitoolchain create mytoolchain <path/to/cpp/sdk>/toolchain.xml -- default
+-> qitoolchain create linux <path/to/cpp/sdk>/toolchain.xml
+-> qitoolchain create mytoolchain <path/to/cpp/sdk>/toolchain.xml
+-> qibuild add-config mytoolchain -t mytoolchain
 -> qitoolchain info
 ```
 
