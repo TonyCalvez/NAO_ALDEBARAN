@@ -55,7 +55,7 @@ Video to compile : https://youtu.be/-7ceG7AA1Do
 -> qitoolchain info
 ```
 
-## To Compilet the Program C++ with the SDK - ALDEBARAN
+## To Compile the Program C++ with the SDK - ALDEBARAN
 ### 6) Workspace : Helloworld </br>
 ```
 -> cd /usr/src/workspace
