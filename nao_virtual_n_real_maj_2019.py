@@ -47,10 +47,11 @@ def found_center_ball(img):
    contours, _  = cv2.findContours(img, 1, 2)
    cnt = contours[0]
    (x, y), radius = cv2.minEnclosingCircle(cnt)
-   center = (int(x), int(y))
+   center = (int(x-160), int(y-120))
    radius = int(radius)
    img = cv2.circle(img, center, radius, (0, 255, 0), 2)
    return center
+
 
 
 def edge_filtering(img):
@@ -299,15 +300,26 @@ while missed < 30:
    coordinate_ball = found_center_ball(img)
    print(coordinate_ball)
 
-   center_screen = (int(imageWidth/2), int(imageHeight/2))
+   coordinate_center_screen = (int(imageWidth/2), int(imageHeight/2))
 
+
+
+   X_robot_head, Y_robot_head = motionProxy.getAngles(names, True)
    X_ball, Y_ball = coordinate_ball
-   if (X_ball or Y_ball) != 0:
-      missed = 0
-      print("VU")
+   print ("Balle de merde", coordinate_ball)
+   print("Angles", motionProxy.getAngles(names, True)) #names  = ["HeadYaw", "HeadPitch"]
 
-   else:
-      missed += 1
+   Delta_Yaw = X_robot_head - X_ball
+   Delta_Pitch = Y_robot_head - Y_ball
+   print(Delta_Yaw, Delta_Pitch)
+
+   print(Delta_Yaw)
+   Delta_Yaw = 0.0015* (Delta_Yaw)
+   print(Delta_Yaw)
+
+   Delta_Pitch = -0.0015*(Delta_Pitch)
+   motionProxy.setAngles(names, [Delta_Yaw, Delta_Pitch], fractionMaxSpeed)
+
    dt = time.time()-t0
    tSleep = dtLoop-dt
    if tSleep>0:
