@@ -249,7 +249,8 @@ while not imgok:
 print "Image Size",imageWidth,imageHeight
 
 missed = 0
-
+Erreur_Pitch = 0
+Erreur_Yaw=0
 while missed < 30: 
    t0=time.time()
    # Get current image (top cam)
@@ -313,12 +314,14 @@ while missed < 30:
    Delta_Pitch = Y_robot_head - Y_ball
    print(Delta_Yaw, Delta_Pitch)
 
-   print(Delta_Yaw)
-   Delta_Yaw = 0.0015* (Delta_Yaw)
-   print(Delta_Yaw)
+   #Delta_Yaw = 0.0015* (Delta_Yaw) Proportionnel
+   Correction_Yaw = (0.0015 * (Delta_Yaw)) # * (((Delta_Yaw - Erreur_Yaw) - 1)*0.001)
+   Erreur_Yaw = Delta_Yaw
 
-   Delta_Pitch = -0.0015*(Delta_Pitch)
-   motionProxy.setAngles(names, [Delta_Yaw, Delta_Pitch], fractionMaxSpeed)
+   Erreur_Pitch = Delta_Pitch
+   
+
+   motionProxy.setAngles(names, [Correction_Yaw, Correction_Pitch], fractionMaxSpeed)
 
    dt = time.time()-t0
    tSleep = dtLoop-dt
