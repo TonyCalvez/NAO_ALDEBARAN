@@ -16,67 +16,6 @@ except:
    import Image
 
 
-def median_color(img, kernel):
-    median = cv2.medianBlur(img, kernel)
-    return median
-
-
-def segmentation_color(img, min_hsv, max_hsv):
-    hsv_img = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
-    # COLORPICKER = [105   8 192] [ 95  -2 152] [115  18 232]
-    floor_low = min_hsv
-    floor_high = max_hsv
-    curr_mask = cv2.inRange(hsv_img, floor_low, floor_high)
-    hsv_img[curr_mask > 0] = ([0, 0, 255])
-    img = cv2.cvtColor(hsv_img, cv2.COLOR_HSV2RGB)
-    return img
-
-
-def gray_converting(img):
-    img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-    return img_gray
-
-
-def thresholding_white_black(img):
-    ret, thresh = cv2.threshold(img, 250, 255, cv2.THRESH_BINARY)
-    # ret, thresh = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY_INV)
-    return thresh
-
-
-def found_center_ball(img):
-   contours, _  = cv2.findContours(img, 1, 2)
-   cnt = contours[0]
-   (x, y), radius = cv2.minEnclosingCircle(cnt)
-   center = (int(x-160), int(y-120))
-   radius = int(radius)
-   img = cv2.circle(img, center, radius, (0, 255, 0), 2)
-   return center
-
-
-
-def edge_filtering(img):
-    # Smoothing without removing edges.
-    bilateral_images = cv2.bilateralFilter(img, 7, 50, 50)
-
-    # Applying the canny filter
-    canny_images = cv2.Canny(bilateral_images, 60, 120)
-    return canny_images
-
-
-def masking_top_screen(img, monitor):
-    vertices = numpy.array(
-        [[0, monitor["height"]], [0, monitor["height"] / 2], [monitor["width"] / 3, monitor["height"] / 3],
-         [2 * monitor["width"] / 3, monitor["height"] / 3], [monitor["width"], monitor["height"] / 2],
-         [monitor["width"], monitor["height"]],
-         ], numpy.int32)
-    mask = numpy.zeros_like(img)
-    # fill the mask
-    cv2.fillPoly(mask, [vertices], 255)
-    # now only show the area that is the mask
-    masked = cv2.bitwise_and(img, mask)
-    return masked
-
-
 def cleanKillNao(signal, frame):
    global postureProxy,motionProxy
    print "pgm interrupted, put NAO is safe pose ..."
@@ -131,9 +70,9 @@ if len(sys.argv) > 2:
 # get image from vrep simulator
 # set the pass to vnao to the correct path on your computer
 #vnao_path = "/home/newubu/MyApps/Nao/v-rep/nao-new-model/tmp/vnao"
-vnao_path = "/home/tonycalvez/Documents/NAO"
+vnao_path = "/home/newubu/Robotics/nao/vnao/plugin-v2"
 # set vnao image name 
-vnao_image = "imgs/out_11212.ppm"
+vnao_image = "imgs/out_%5.5d.ppm"%(PORT)
 cameraImage=os.path.join(vnao_path,vnao_image)
 
 # init motion
@@ -249,8 +188,7 @@ while not imgok:
 print "Image Size",imageWidth,imageHeight
 
 missed = 0
-Erreur_Pitch = 0
-Erreur_Yaw=0
+
 while missed < 30: 
    t0=time.time()
    # Get current image (top cam)
@@ -288,41 +226,17 @@ while missed < 30:
 
    #
    # insert detection function here
-   img_src = cvImg
-   # Display the picture
-   # cv2.imshow("OpenCV/Numpy normal", img)
-   min_hsv = np.array([75, 250, 170])
-   max_hsv = np.array([105, 270, 255])
-   img = segmentation_color(img_src, min_hsv, max_hsv)
-   img = median_color(img, 25)
-   img = gray_converting(img)
-   img = thresholding_white_black(img)
-   img = edge_filtering(img)
-   coordinate_ball = found_center_ball(img)
-   print(coordinate_ball)
-
-   coordinate_center_screen = (int(imageWidth/2), int(imageHeight/2))
-
-
-
-   X_robot_head, Y_robot_head = motionProxy.getAngles(names, True)
-   X_ball, Y_ball = coordinate_ball
-   print ("Balle de merde", coordinate_ball)
-   print("Angles", motionProxy.getAngles(names, True)) #names  = ["HeadYaw", "HeadPitch"]
-
-   Delta_Yaw = X_robot_head - X_ball
-   Delta_Pitch = Y_robot_head - Y_ball
-   print(Delta_Yaw, Delta_Pitch)
-
-   #Delta_Yaw = 0.0015* (Delta_Yaw) Proportionnel
-   Correction_Yaw = (0.0015 * (Delta_Yaw)) # * (((Delta_Yaw - Erreur_Yaw) - 1)*0.001)
-   Erreur_Yaw = Delta_Yaw
-
-   Erreur_Pitch = Delta_Pitch
+   #
    
+   if (found):
+      missed = 0
 
-   motionProxy.setAngles(names, [Correction_Yaw, Correction_Pitch], fractionMaxSpeed)
+      #
+      # insert head control here
+      #
 
+   else:
+      missed += 1
    dt = time.time()-t0
    tSleep = dtLoop-dt
    if tSleep>0:
